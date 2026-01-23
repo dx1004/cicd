@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Even or Odd</title>
+</head>
+<body>
+    <h1>Number: {{ number }}</h1>
+    
+    {% if number|divisibleby:2 %}
+        <p>Result: Even</p>
+    {% else %}
+        <p>Result: Odd</p>
+    {% endif %}
+</body>
+</html>
