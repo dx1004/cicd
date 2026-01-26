@@ -59,12 +59,12 @@ def lang(request):
 # Create a form with one input field. 
 # On submit, display the entered value on the same page.
 def form(request):
-    result = None
+    context = None
     if request.method == "POST":
         result = request.POST.get('user_input')
         
-    context = {
-        'result' : result
-    }
+        context = {
+            'result' : result
+        }
     
     return render(request, 'form.html', context)
