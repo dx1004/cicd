@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 
 # Create your views here.
 def login(request):
+    # Clear session when user comes from success page (new session)
+    if request.GET.get('new_session') == '1':
+        request.session.flush()
+    
     context = {}
     if 'login' not in request.session:
         request.session['login'] = 0
@@ -10,7 +14,7 @@ def login(request):
         if request.POST.get('username') == "admin" and request.POST.get('password') == "1234":
             request.session['login'] = 0
             request.session['success'] = True
-            return redirect('dashboard')  # Redirect to dashboard or another page
+            return redirect('success') 
         else:
             request.session['login'] += 1
             context = {'error': "Invalid Credentials"}
@@ -24,6 +28,8 @@ def login(request):
         del request.session['success']
     
     return render(request, 'login.html', context)
-    
-    
+
+
+def success(request):
+    return render(request, 'success.html')
     
